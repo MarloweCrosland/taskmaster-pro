@@ -33,7 +33,7 @@ var loadTasks = function() {
 
   // loop over object properties
   $.each(tasks, function(list, arr) {
-    console.log(list, arr);
+   
     // then loop over sub-array
     arr.forEach(function(task) {
       createTask(task.text, task.date, list);
@@ -45,6 +45,45 @@ var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+// bubble up event listener
+$(".list-group").on("click", "p", function() {
+  var text = $(this)
+  var textInput = $("<textarea>")
+  .addClass("form-control")
+  .val(text);
+    .text()
+    .trim();
+});
+
+    // get the textarea's current value/text
+var text = $(this)
+  .val()
+  .trim();
+
+// get the parent ul's id attribute
+var status = $(this)
+  .closest(".list-group")
+  .attr("id")
+  .replace("list-", "");
+
+// get the task's position in the list of other li elements
+var index = $(this)
+  .closest(".list-group-item")
+  .index();
+  });
+
+  tasks[status][index].text = text;
+saveTasks();
+
+  var text = $(this)
+  var textInput = $("<textarea>")
+  $(this).replaceWith(textInput);
+  textInput.trigger("focus");
+  .addClass("form-control")
+  .val(text);
+    .text()
+    .trim();
+});
 
 
 
